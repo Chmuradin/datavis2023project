@@ -17,6 +17,7 @@ export const load = ({ fetch }) => {
         return data
     }
 
+
     return {
         GPSTracking: fetchGPSTracking(),
         pointsOfInterest: fetchPointsOfInterest(),
