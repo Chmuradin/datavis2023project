@@ -17,7 +17,7 @@ export const load = ({ fetch }) => {
         return data
     }
 
-
+    // for some reason, housing_1 has different type than the other ones
     return {
         GPSTracking: fetchGPSTracking(),
         pointsOfInterest: fetchPointsOfInterest(),
