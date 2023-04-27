@@ -3,7 +3,10 @@
 	import { schemeDark2 } from 'd3-scale-chromatic';
 	import { scaleLinear, scaleOrdinal } from 'd3-scale';
 	import {createEventDispatcher} from 'svelte';
+	import details from './details.svelte';
 	export let data;
+
+
 
 	// Dimensions of the image
 	const height = 600;
@@ -32,8 +35,16 @@
 	}
 
 
+	//stuff to be moved to other file later
+	const heightDetails = 300;
+	const widthDetails = 300;
+	// also long and lat scales
+	const longScaleDetails = scaleLinear().domain([Math.min(...long), Math.max(...long)]).range([0, heightDetails]);
+	const latScaleDetails = scaleLinear().domain([Math.min(...lat), Math.max(...lat)]).range([0, widthDetails]);
+	const test = 10000;
 
 </script>
+
 
 <h1>Michał Chmura - KU Leuven - r0960234</h1>
 <h2>Overview</h2>
@@ -46,7 +57,7 @@
 		{/each}
 	</select><br />
 	{#if cur_id !== 0}
-		Go to <a href="/cars/{cur_id}">details</a> for car {cur_id}.
+		Go to <a href="details">details</a> for car {cur_id}.
 	{/if}
 </div>
 
@@ -58,14 +69,43 @@
 		<circle cx={longScale(dpI.long)}
 				cy={height - latScale(dpI.lat)}
 				r="5"
-				fill={ordinalScale(dpI.type)}
+				fill={ordinalScale(dpI.type)} 
 				class="locationType">
 			<title>{dpI.name}</title>
 		</circle>
-	{/each}
+	{/each} 
 
 
 </svg>
+
+<div>
+	<a href="Car_ownership">Car ownership</a>
+</div>
+<div>
+	<a href="Prev">Previous car</a> <a href="Next">Next car</a>
+</div>
+
+
+<h1>Michał Chmura - KU Leuven - r0960234</h1>
+<div>
+	{#if cur_id !== 0}
+	<h2><b> Details for car {cur_id}</b></h2>
+	{/if}
+</div>
+
+<svg {width} {height}>
+	{#each data.GPSTracking as dp}
+  		{#if dp.car_id === cur_id}
+    	<circle cx={longScaleDetails(dp.long)} cy={heightDetails - latScaleDetails(dp.lat)} r="3" class:selected={dp.car_id == cur_id && test >= dp.cumulative_minute_total - 15 && test <= dp.cumulative_minute_total + 15}/>
+  		{/if}
+
+	{/each}
+
+	
+</svg>
+
+
+
 
 <style>
 	circle {
@@ -80,5 +120,6 @@
 	circle.locationType {
 		fill-opacity: 1;
 	}
+	
 
 </style>
