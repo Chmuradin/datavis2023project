@@ -3,15 +3,19 @@
 	import { schemeDark2 } from 'd3-scale-chromatic';
 	import { scaleLinear, scaleOrdinal } from 'd3-scale';
 	import {createEventDispatcher} from 'svelte';
-	import details from './details.svelte';
+	import Controls from './controls.svelte';
 	export let data;
-
-
-
+	//testing slider
+	let minute = 0
+	let cont = "all"
+	//
 	// Dimensions of the image
 	const height = 600;
 	const width = 600;
-
+	//TBMoved
+	const heightDetails = 300;
+	const widthDetails = 300;
+	//
 	// Lat/long and their scales
 	const long = [...new Set(data.GPSTracking.map((/** @type {{ long: any; }} */ v) => v.long))];
 	const longScale = scaleLinear().domain([Math.min(...long), Math.max(...long)]).range([0, height]);
@@ -19,29 +23,26 @@
 	const lat = [...new Set(data.GPSTracking.map((/** @type {{ lat: any; }} */ v) => v.lat))];
 	const latScale = scaleLinear().domain([Math.min(...lat), Math.max(...lat)]).range([0, width]);
 
+	// TBMoved
+	const longScaleDetails = scaleLinear().domain([Math.min(...long), Math.max(...long)]).range([0, heightDetails]);
+	const latScaleDetails = scaleLinear().domain([Math.min(...lat), Math.max(...lat)]).range([0, widthDetails]);
+	const test = 10000;
+	///
+
 	// Color scale
-	const locationTypesUniques = [...new Set(data.pointsOfInterest.map((/** @type {{ type: any; }} */ v) => v.type))];
+		const locationTypesUniques = [...new Set(data.pointsOfInterest.map((/** @type {{ type: any; }} */ v) => v.type))];
 	const ordinalScale = scaleOrdinal(schemeDark2).domain(locationTypesUniques);
 
 	// Selection toolbox
 	const dispatch = createEventDispatcher();
 	const u_ids = [...new Set(data.GPSTracking.map((v) => v.car_id))];
 	let cur_id = 0; // Starting value
-
 	function selectID() {
 		dispatch('eee', {
 			value: cur_id
 		})
 	}
 
-
-	//stuff to be moved to other file later
-	const heightDetails = 300;
-	const widthDetails = 300;
-	// also long and lat scales
-	const longScaleDetails = scaleLinear().domain([Math.min(...long), Math.max(...long)]).range([0, heightDetails]);
-	const latScaleDetails = scaleLinear().domain([Math.min(...lat), Math.max(...lat)]).range([0, widthDetails]);
-	const test = 10000;
 
 </script>
 
@@ -79,10 +80,10 @@
 </svg>
 
 <div>
-	<a href="Car_ownership">Car ownership</a>
+	<a href="/routes">Car overview</a>
 </div>
 <div>
-	<a href="Prev">Previous car</a> <a href="Next">Next car</a>
+	<a href="/det">Previous car</a> <a href="/det">Next car</a>
 </div>
 
 
@@ -90,13 +91,15 @@
 <div>
 	{#if cur_id !== 0}
 	<h2><b> Details for car {cur_id}</b></h2>
+	<Controls data={data} bind:minute={minute}/>
+
 	{/if}
 </div>
 
 <svg {width} {height}>
 	{#each data.GPSTracking as dp}
   		{#if dp.car_id === cur_id}
-    	<circle cx={longScaleDetails(dp.long)} cy={heightDetails - latScaleDetails(dp.lat)} r="3" class:selected={dp.car_id == cur_id && test >= dp.cumulative_minute_total - 15 && test <= dp.cumulative_minute_total + 15}/>
+    	<circle cx={longScaleDetails(dp.long)} cy={heightDetails - latScaleDetails(dp.lat)} r="3" class:selected={dp.car_id == cur_id && minute >= dp.cumulative_minute_total - 15 && minute <= dp.cumulative_minute_total + 15}/>
   		{/if}
 
 	{/each}
@@ -107,13 +110,14 @@
 
 
 
+
 <style>
 	circle {
 		fill-opacity: 0.04;
 	}
 
 	circle.selected {
-		fill-opacity: 0.99;
+		fill-opacity: 1;
 		fill: red;
 	}
 
