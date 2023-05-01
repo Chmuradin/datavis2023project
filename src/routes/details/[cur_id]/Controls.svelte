@@ -1,11 +1,10 @@
 <script>
     // Properties
-    export let data = [];
-    export let minute = 0; //1800
+    export let data;
     let timer = false;
     let clicked = false; 
     function increment() { 
-      minute == 20160 ? minute = 0 : minute += 1
+      data.minuteSlider == 20160 ? data.minuteSlider = 0 : data.minuteSlider += 1
     }
     function start() {
       if (timer == false) {
@@ -35,7 +34,7 @@
         <button class="btn btn-secondary" on:click={reset}>Reset</button>
     </div>
     <div>
-      <input type="range" class="form-range" min="0" max="20160" bind:value={minute} id="slider" style="margin: 0; width: 300px;">
+      <input type="range" class="form-range" min="0" max="20160" bind:value={data.minuteSlider} id="slider" style="margin: 0; width: 300px;">
     </div> 
     
   
