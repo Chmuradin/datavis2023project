@@ -1,8 +1,7 @@
 <script>
-	import { scaleLinear } from 'd3-scale';
 	import { goto } from '$app/navigation';
 	import Scatter from './Scatter.svelte'
-	import {Controls} from './Controls.svelte'
+	import Controls from './Controls.svelte'
 	export let data;
 	function previousPage() {
 		goto(`/details/${data.currentCarId - 1}`);
@@ -31,12 +30,9 @@
 </div>
 
 <div>
-	<Controls data={data} bind:minute={data.minuteSlider}/>
+	<Controls datar={data} onChange={(event)=>{data.minuteSlider = event.target.value}}/>
 </div>
-
-
 
 <div>
 	<Scatter data={data}/>
 </div>
-

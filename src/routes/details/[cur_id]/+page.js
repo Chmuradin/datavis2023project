@@ -1,8 +1,6 @@
 export const load = ({ fetch, params }) => {
     const currentCarId = Number(params.cur_id);
 
-    const minuteSlider = 0;
-
     const fetchGPSTrackingById = async () => {
         const res = await fetch("https://vda-lab.github.io/assets/vast2021_gps_coordinates.json")
         const data = await res.json()
@@ -37,6 +35,6 @@ export const load = ({ fetch, params }) => {
         pointsOfInterest: fetchPointsOfInterestById(),
         carStops: fetchCarStopsById(),
         currentCarId,
-        minuteSlider,
+        minuteSlider: 0,
     }
 }
