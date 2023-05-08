@@ -16,7 +16,7 @@
 
 <svg {width} {height}>
     {#each data.GPSTrackingID as dp}
-    <circle cx={longScale(dp.long)} cy={height - latScale(dp.lat)} r="3" class:selected={data.minuteSlider > dp.cumulative_minute_total - 900 && data.minuteSlider < dp.cumulative_minute_total + 900}/>
+    <circle cx={longScale(dp.long)} cy={height - latScale(dp.lat)} r="3" class:selected={data.minuteSlider > dp.cumulative_minute_total - 15 && data.minuteSlider < dp.cumulative_minute_total + 15}/>
     {/each}
 
 </svg>
