@@ -1,7 +1,8 @@
 <script>
 	import { goto } from '$app/navigation';
 	import Scatter from './Scatter.svelte'
-	import Controls from './Controls.svelte'
+	import Slider from './Slider.svelte'
+	import Barchart from './Barchart.svelte'
 	export let data;
 	function previousPage() {
 		goto(`/details/${data.currentCarId - 1}`);
@@ -30,9 +31,12 @@
 </div>
 
 <div>
-	<Controls datar={data} onChange={(event)=>{data.minuteSlider = event.target.value}}/>
+	<Slider data={data} onChange={(event)=>{data.minuteSlider = event.target.value}}/>
 </div>
 
 <div>
 	<Scatter data={data}/>
+	<Barchart data={data}/>
 </div>
+
+
