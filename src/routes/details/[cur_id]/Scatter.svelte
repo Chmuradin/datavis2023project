@@ -1,7 +1,6 @@
 <script>
     // Dependencies
-	import { scaleLinear} from 'd3-scale';
-    // Properties
+	import {scaleLinear} from 'd3-scale';
     export let data;
     // Dimensions, coordinates and scales
 	const height = 300;
