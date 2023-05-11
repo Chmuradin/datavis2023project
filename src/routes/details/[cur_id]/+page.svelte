@@ -1,5 +1,5 @@
 <script>
-	import { goto } from '$app/navigation';
+	import {goto} from '$app/navigation';
 	import Scatter from './Scatter.svelte'
 	import Slider from './Slider.svelte'
 	import Barchart from './Barchart.svelte'

@@ -2,9 +2,9 @@
 	// Dependencies
     import {scaleLinear, scaleQuantize, scaleOrdinal} from "d3-scale";
 	import * as _ from 'underscore';
-	import { axisBottom, axisLeft } from 'd3-axis';
-	import { select } from 'd3-selection';
-    import { schemeDark2 } from 'd3-scale-chromatic';
+	import {axisLeft, axisBottom} from 'd3-axis';
+	import {select} from 'd3-selection';
+    import {schemeDark2} from 'd3-scale-chromatic';
     export let data;
     // Dimensions, coordinates and scales
     const width = 300
