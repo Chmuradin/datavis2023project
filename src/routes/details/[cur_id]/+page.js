@@ -21,7 +21,6 @@ export const load = ({ fetch, params }) => {
         return data.filter((d) => d.car_id === currentCarId);
     }
 
-
     const fetchCarStopsById = async () => {
         const res = await fetch("https://vda-lab.github.io/assets/vast2021_carstops.json")
         const data = await res.json()

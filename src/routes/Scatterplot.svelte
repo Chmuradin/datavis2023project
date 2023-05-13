@@ -1,7 +1,7 @@
 <script>
     // Dependencies
-    import { schemeDark2 } from 'd3-scale-chromatic';
-	import { scaleLinear, scaleOrdinal } from 'd3-scale';
+    import {schemeDark2} from 'd3-scale-chromatic';
+	import {scaleLinear, scaleOrdinal} from 'd3-scale';
     // Properties
     export let data;
 	export let cur_id;
@@ -15,8 +15,6 @@
     // Color schema
 	const locationTypesUniques = [...new Set(data.pointsOfInterest.map((/** @type {{ type: any; }} */ v) => v.type))];
 	const ordinalScale = scaleOrdinal(schemeDark2).domain(locationTypesUniques);
-
-
 </script>
 
 <svg {width} {height}>
@@ -32,24 +30,17 @@
 			<title>{dpI.name}</title>
 		</circle>
 	{/each} 
-
-
 </svg>
-
 
 <style>
 	circle {
 		fill-opacity: 0.04;
 	}
-
 	circle.selected {
 		fill-opacity: 1;
 		fill: red;
 	}
-
 	circle.locationType {
 		fill-opacity: 1;
 	}
-	
-
 </style>

@@ -16,7 +16,6 @@ export const load = ({ fetch }) => {
         const data = await res.json()
         return data
     }
-
     // for some reason, housing_1 has different type than the other ones
     return {
         GPSTracking: fetchGPSTracking(),
