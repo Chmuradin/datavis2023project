@@ -27,16 +27,11 @@
 	{#if data.currentCarId !== 0}
 		<h2><b> Details for car {data.currentCarId}</b></h2>
 	{/if}
-	<h1>Current total minute {data.minuteSlider}</h1>
 </div>
-
 <div>
 	<Slider data={data} onChange={(event)=>{data.minuteSlider = event.target.value}}/>
 </div>
-
 <div>
 	<Scatter data={data}/>
 	<Barchart data={data}/>
 </div>
-
-
